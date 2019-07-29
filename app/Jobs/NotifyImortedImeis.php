@@ -33,7 +33,7 @@ class NotifyImortedImeis implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to('ortegon000@gmail.com')->send( new ImeisImportedMail($this->fileName) );
-        Log::info('Mailed imported to ortegon000@gmail.com');
+        Mail::to('info@liberacionesporimei.com')->send( new ImeisImportedMail($this->fileName) );
+        Log::info('Mailed imported to info@liberacionesporimei.com');
     }
 }

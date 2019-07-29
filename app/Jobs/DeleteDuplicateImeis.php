@@ -45,7 +45,7 @@ class DeleteDuplicateImeis implements ShouldQueue
             });
         });
 
-        Mail::to('ortegon000@gmail.com')->send( new DeletedDuplicatesMail() );
-        Log::info('Mailed deleted to ortegon000@gmail.com');
+        Mail::to('info@liberacionesporimei.com')->send( new DeletedDuplicatesMail() );
+        Log::info('Mailed deleted to info@liberacionesporimei.com');
     }
 }
