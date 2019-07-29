@@ -4,6 +4,7 @@ namespace App\Imports;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\RegistersEventListeners;
 use Maatwebsite\Excel\Concerns\ToArray;
@@ -15,8 +16,6 @@ class ImeiImport implements ToArray, WithChunkReading, WithHeadingRow, ShouldQue
 {
     use Importable, RegistersEventListeners;
 
-    public $timeout = 20000;
-    public $tries = 3;
     public $filename;
 
     public function __construct($fileName)
@@ -41,6 +40,7 @@ class ImeiImport implements ToArray, WithChunkReading, WithHeadingRow, ShouldQue
 
         $console =  new ConsoleOutput;
         $console->writeln("File name: $this->filename");
+        Log::info("Uploading File name: $this->filename");
 
     }
 
