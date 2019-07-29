@@ -2,16 +2,13 @@
 
 namespace App\Jobs;
 
-use App\Imports\ImeiImport;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\Queue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Maatwebsite\Excel\Facades\Excel;
 
-class ImporDir implements ShouldQueue
+class NotifyDeletedDuplicates implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -32,5 +29,6 @@ class ImporDir implements ShouldQueue
      */
     public function handle()
     {
+        //
     }
 }

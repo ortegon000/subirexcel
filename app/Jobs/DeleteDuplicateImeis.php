@@ -3,11 +3,14 @@
 namespace App\Jobs;
 
 use App\Imei;
+use App\Mail\DeletedDuplicatesMail;
+use App\Mail\ImeisImportedMail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Support\Facades\Mail;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
 class DeleteDuplicateImeis implements ShouldQueue
@@ -39,8 +42,8 @@ class DeleteDuplicateImeis implements ShouldQueue
                 }
                 $array[] = $item->imei;
             });
-
-//            ConsoleOutput::
         });
+
+        Mail::to('ortegon000@gmail.com')->send( new DeletedDuplicatesMail() );
     }
 }

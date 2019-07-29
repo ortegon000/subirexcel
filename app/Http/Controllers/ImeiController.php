@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\ImeiTemplateExport;
 use App\Imports\ImeiImport;
 use App\Jobs\DeleteDuplicateImeis;
-use App\Jobs\ImporDir;
+use App\Jobs\NotifyImortedImeis;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -17,7 +17,13 @@ class ImeiController extends Controller
             'file' => 'required|file|mimes:xls,xlsx'
         ]);
 
-        Excel::import(new ImeiImport($request->file('file')->getClientOriginalName()), $request->file('file'));
+        $fileName = $request->file('file')->getClientOriginalName();
+
+        (new ImeiImport($fileName))
+            ->queue($request->file('file'))
+            ->chain([
+                new NotifyImortedImeis($fileName)
+            ]);
 
         return back()->with([
             'response' => [

@@ -4,6 +4,8 @@ namespace App\Imports;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Concerns\Importable;
+use Maatwebsite\Excel\Concerns\RegistersEventListeners;
 use Maatwebsite\Excel\Concerns\ToArray;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -11,6 +13,8 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 
 class ImeiImport implements ToArray, WithChunkReading, WithHeadingRow, ShouldQueue
 {
+    use Importable, RegistersEventListeners;
+
     public $timeout = 20000;
     public $tries = 3;
     public $filename;
