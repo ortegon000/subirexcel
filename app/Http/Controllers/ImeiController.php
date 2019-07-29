@@ -22,7 +22,7 @@ class ImeiController extends Controller
         (new ImeiImport($fileName))
             ->queue($request->file('file'))
             ->chain([
-//                new NotifyImortedImeis($fileName)
+                new NotifyImortedImeis($fileName)
             ]);
 
         return back()->with([
