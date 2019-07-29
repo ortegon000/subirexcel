@@ -10,6 +10,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
@@ -45,5 +46,6 @@ class DeleteDuplicateImeis implements ShouldQueue
         });
 
         Mail::to('ortegon000@gmail.com')->send( new DeletedDuplicatesMail() );
+        Log::info('Mailed deleted to ortegon000@gmail.com');
     }
 }

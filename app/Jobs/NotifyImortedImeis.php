@@ -8,6 +8,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class NotifyImortedImeis implements ShouldQueue
@@ -33,5 +34,6 @@ class NotifyImortedImeis implements ShouldQueue
     public function handle()
     {
         Mail::to('ortegon000@gmail.com')->send( new ImeisImportedMail($this->fileName) );
+        Log::info('Mailed imported to ortegon000@gmail.com');
     }
 }
