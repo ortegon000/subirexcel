@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eba4c7cd-e813-4ae0-8f96-3152a0b7f582" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Imports/ImeiImport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Imports/ImeiImport.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/tmp/laravel-excel-DFnZeuHc3JFJzFd39glUydd4llt6Lily.tmp" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,7 +22,7 @@
         <entry file="file://$PROJECT_DIR$/app/Imports/ImeiImport.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="260">
-              <caret line="29" column="39" selection-start-line="29" selection-start-column="39" selection-end-line="29" selection-end-column="39" />
+              <caret line="29" column="38" selection-start-line="29" selection-start-column="38" selection-end-line="29" selection-end-column="38" />
               <folding>
                 <element signature="e#31#74#0#PHP" expanded="true" />
               </folding>
@@ -286,12 +284,12 @@
       <workItem from="1564499550604" duration="2144000" />
       <workItem from="1564511778507" duration="799000" />
       <workItem from="1564515763713" duration="1546000" />
-      <workItem from="1564524673473" duration="395000" />
+      <workItem from="1564524673473" duration="598000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="72734000" />
+    <option name="totallyTimeSpent" value="72937000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="54" y="-8" width="1874" height="1096" extended-state="6" />
@@ -652,7 +650,7 @@
     <entry file="file://$PROJECT_DIR$/app/Imports/ImeiImport.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="260">
-          <caret line="29" column="39" selection-start-line="29" selection-start-column="39" selection-end-line="29" selection-end-column="39" />
+          <caret line="29" column="38" selection-start-line="29" selection-start-column="38" selection-end-line="29" selection-end-column="38" />
           <folding>
             <element signature="e#31#74#0#PHP" expanded="true" />
           </folding>

@@ -27,7 +27,7 @@ class ImeiImport implements ToArray, WithChunkReading, WithHeadingRow, ShouldQue
     public function __construct($fileName)
     {
         set_time_limit ( 3200 );
-        ini_set('memory_limit', '1024MB');
+        ini_set('memory_limit', '1024M');
         $this->filename = $fileName;
     }
 
