@@ -12,7 +12,6 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use Symfony\Component\Console\Output\ConsoleOutput;
 
 class DeleteDuplicateImeis implements ShouldQueue
 {
@@ -44,8 +43,5 @@ class DeleteDuplicateImeis implements ShouldQueue
                 $array[] = $item->imei;
             });
         });
-
-        Mail::to('info@liberacionesporimei.com')->send( new DeletedDuplicatesMail() );
-        Log::info('Mailed deleted to info@liberacionesporimei.com');
     }
 }

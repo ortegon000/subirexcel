@@ -4,18 +4,18 @@ namespace App\Imports;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Concerns\Importable;
-use Maatwebsite\Excel\Concerns\RegistersEventListeners;
 use Maatwebsite\Excel\Concerns\ToArray;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class ImeiImport implements ToArray, WithChunkReading, WithHeadingRow, ShouldQueue
 {
-    use Importable, RegistersEventListeners;
+    use Importable;
 
     public $filename;
+    public $timeOut = 20000;
+    public $tries = 3;
 
     public function __construct($fileName)
     {
@@ -36,9 +36,6 @@ class ImeiImport implements ToArray, WithChunkReading, WithHeadingRow, ShouldQue
                 'codigo2' => $code2 ?? '',
             ]);
         }
-
-        Log::info("Uploading File name: $this->filename");
-
     }
 
     public function chunkSize(): int
