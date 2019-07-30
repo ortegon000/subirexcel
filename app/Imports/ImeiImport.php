@@ -10,7 +10,6 @@ use Maatwebsite\Excel\Concerns\RegistersEventListeners;
 use Maatwebsite\Excel\Concerns\ToArray;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-use Symfony\Component\Console\Output\ConsoleOutput;
 
 class ImeiImport implements ToArray, WithChunkReading, WithHeadingRow, ShouldQueue
 {
@@ -38,14 +37,12 @@ class ImeiImport implements ToArray, WithChunkReading, WithHeadingRow, ShouldQue
             ]);
         }
 
-        $console =  new ConsoleOutput;
-        $console->writeln("File name: $this->filename");
         Log::info("Uploading File name: $this->filename");
 
     }
 
     public function chunkSize(): int
     {
-        return 10000;
+        return 2500;
     }
 }

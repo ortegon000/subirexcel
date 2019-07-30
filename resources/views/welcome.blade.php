@@ -51,37 +51,45 @@
         <div class="flex-center position-ref full-height">
             <div class="content">
 
-                @if (session('response'))
-                    <div class="alert alert-{{session('response')['type']}}">
-                        {{ session('response')['message'] }}
+                @if ($queueRunning)
+                    <div class="alert alert-warning">
+                        <p>Actualmente se esta subiendo un archivo</p>
                     </div>
                 @else
-                    <form action="{{ route('upload_excel') }}" method="POST" enctype="multipart/form-data">
-                        {{ csrf_field() }}
-                        <div class="form-group">
-                            <label for="file">Selecciona el excel para subir</label> <br>
-                            <input name="file" type="file" class="form-control-file" id="file" required> <br>
-                            <button type="submit" class="btn btn-success">Subir archivo</button>
+                    @if (session('response'))
+                        <div class="alert alert-{{session('response')['type']}}">
+                            {{ session('response')['message'] }}
                         </div>
-
-                        @if($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach( $errors->all() as $error)
-                                        <li>
-                                            {{ $error }}
-                                        </li>
-                                    @endforeach
-                                </ul>
+                    @else
+                        <form action="{{ route('upload_excel') }}" method="POST" enctype="multipart/form-data">
+                            {{ csrf_field() }}
+                            <div class="form-group">
+                                <label for="file">Selecciona el excel para subir</label> <br>
+                                <input name="file" type="file" class="form-control-file" id="file" required> <br>
+                                <button type="submit" class="btn btn-success">Subir archivo</button>
                             </div>
-                        @endif
-                    </form>
+
+                            @if($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach( $errors->all() as $error)
+                                            <li>
+                                                {{ $error }}
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                        </form>
+                    @endif
+
+                    <div>
+                        <a href="{{ route('download_excel.template') }}" class="btn btn-primary btn-sm mt-5">Descargar plantilla de excel</a>
+                        <a href="{{ route('delete_duplicates') }}" class="btn btn-danger btn-sm mt-5">Borrar duplicados</a>
+                    </div>
                 @endif
 
-                <div>
-                    <a href="{{ route('download_excel.template') }}" class="btn btn-primary btn-sm mt-5">Descargar plantilla de excel</a>
-                    <a href="{{ route('delete_duplicates') }}" class="btn btn-danger btn-sm mt-5">Borrar duplicados</a>
-                </div>
+
             </div>
         </div>
     </body>

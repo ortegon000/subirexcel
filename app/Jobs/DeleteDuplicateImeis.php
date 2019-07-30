@@ -36,7 +36,7 @@ class DeleteDuplicateImeis implements ShouldQueue
     public function handle()
     {
         $array = [];
-        Imei::chunk(25000, function ($items) use (&$array) {
+        Imei::chunk(2500, function ($items) use (&$array) {
             $items->each( function ($item) use (&$array) {
                 if ( in_array($item->imei, $array) ) {
                     $item->delete();
