@@ -13,7 +13,7 @@ class ImeiController extends Controller
     public function uploadExcel(Request $request)
     {
         $request->validate([
-            'file' => 'required|file|mimes:xls,xlsx'
+            'file' => 'required|file|mimes:xls,xlsx|max:12000'
         ]);
 
         $fileName = $request->file('file')->getClientOriginalName();

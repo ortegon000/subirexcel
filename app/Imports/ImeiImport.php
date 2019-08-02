@@ -5,18 +5,14 @@ namespace App\Imports;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\Importable;
-use Maatwebsite\Excel\Concerns\RegistersEventListeners;
 use Maatwebsite\Excel\Concerns\ToArray;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-use Maatwebsite\Excel\Events\AfterImport;
-use Maatwebsite\Excel\Events\BeforeImport;
-use PhpOffice\PhpSpreadsheet\Settings;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
 class ImeiImport implements ToArray, WithChunkReading, WithHeadingRow, ShouldQueue
 {
-    use Importable, RegistersEventListeners;
+    use Importable;
 
     public $filename;
     public $timeOut = 20000;
@@ -27,15 +23,8 @@ class ImeiImport implements ToArray, WithChunkReading, WithHeadingRow, ShouldQue
     public function __construct($fileName)
     {
         set_time_limit ( 3200 );
-        ini_set('memory_limit', '1024M');
+        ini_set('memory_limit', '2048M');
         $this->filename = $fileName;
-    }
-
-    public static function beforeImport(BeforeImport $event)
-    {
-        $options = LIBXML_COMPACT | LIBXML_PARSEHUGE;
-
-        Settings::setLibXmlLoaderOptions($options);
     }
 
     public function array(array $rows)
@@ -53,11 +42,11 @@ class ImeiImport implements ToArray, WithChunkReading, WithHeadingRow, ShouldQue
             $this->sum++;
         }
 
-        (new ConsoleOutput)->writeln("Number of rows inserted $this->sum");
+        (new ConsoleOutput)->writeln("Number of rows inserted $this->sum on file $this->filename");
     }
 
     public function chunkSize(): int
     {
-        return 10000;
+        return 8000;
     }
 }

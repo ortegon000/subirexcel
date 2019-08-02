@@ -61,6 +61,16 @@
                             {{ session('response')['message'] }}
                         </div>
                     @else
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
                         <form action="{{ route('upload_excel') }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group">
@@ -68,18 +78,6 @@
                                 <input name="file" type="file" class="form-control-file" id="file" required> <br>
                                 <button type="submit" class="btn btn-success">Subir archivo</button>
                             </div>
-
-                            @if($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach( $errors->all() as $error)
-                                            <li>
-                                                {{ $error }}
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
                         </form>
                     @endif
 
