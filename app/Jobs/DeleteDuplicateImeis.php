@@ -8,6 +8,8 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use SebastianBergmann\Environment\Console;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
 class DeleteDuplicateImeis implements ShouldQueue
 {
@@ -34,13 +36,16 @@ class DeleteDuplicateImeis implements ShouldQueue
     public function handle()
     {
         $array = [];
-        Imei::chunk(2500, function ($items) use (&$array) {
+        Imei::chunk(10000, function ($items) use (&$array) {
             $items->each( function ($item) use (&$array) {
                 if ( in_array($item->imei, $array) ) {
                     $item->delete();
                 }
                 $array[] = $item->imei;
             });
+
+            $consoleOutput = new ConsoleOutput;
+            $consoleOutput->writeln("Se ha procesado la cantidad de " . count($array) . " registros para borrado de duplicados");
         });
     }
 }
