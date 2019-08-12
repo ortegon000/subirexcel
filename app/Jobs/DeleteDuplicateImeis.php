@@ -38,18 +38,23 @@ class DeleteDuplicateImeis implements ShouldQueue
         set_time_limit ( 12000 );
         ini_set('memory_limit', '2048M');
 
-        Imei::orderBy('imei', 'ASC')->chunk(20000, function ($items) {
+        $quantityProcessed = 0;
+        Imei::chunk(50000, function ($items) use (&$quantityProcessed) {
             $array = [];
 
-            $items->each( function ($item) use (&$array) {
+            $items->each( function ($item) use (&$array, &$quantityProcessed){
                 if ( in_array($item->imei, $array) ) {
                     $item->delete();
                 }
                 $array[] = $item->imei;
+                $quantityProcessed++;
             });
 
-            $consoleOutput = new ConsoleOutput;
-            $consoleOutput->writeln("Se ha procesado la cantidad de " . count($array) . " registros para borrado de duplicados");
+            (new ConsoleOutput)->writeln(
+                "Se ha procesado la cantidad de " . count($array) . " registros para borrado de duplicados"
+            );
+
+            unset($array);
         });
     }
 }
