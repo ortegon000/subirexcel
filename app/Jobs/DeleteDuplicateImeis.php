@@ -37,7 +37,7 @@ class DeleteDuplicateImeis implements ShouldQueue
     {
         set_time_limit ( 12000 );
         ini_set('memory_limit', '2048M');
-        Imei::orderBy('iemi', 'ASC')->chunk(50000, function ($items) {
+        Imei::orderBy('imei', 'ASC')->chunk(50000, function ($items) {
             $array = [];
 
             $items->each( function ($item) use (&$array) {
