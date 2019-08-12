@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eba4c7cd-e813-4ae0-8f96-3152a0b7f582" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Jobs/DeleteDuplicateImeis.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/DeleteDuplicateImeis.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,32 +23,6 @@
         <option value="Blade File" />
       </list>
     </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>queue</find>
-      <find>where</find>
-      <find>processed</find>
-      <find>consoleOut</find>
-      <find>:</find>
-      <find>AfterImportJob</find>
-      <find>$import-&gt;getConsoleOutput()</find>
-      <find>$this-&gt;chunkSize</find>
-      <find>Processing:</find>
-      <find>ReadChu</find>
-      <find>ReadChunk(</find>
-      <find>read(</find>
-      <find>getConsoleOutput</find>
-      <find>function getConsoleOutp</find>
-    </findStrings>
-    <dirStrings>
-      <dir>C:\wamp64\www\Test\imei\vendor\maatwebsite\excel\src</dir>
-      <dir>C:\wamp64\www\Test\imei\vendor\maatwebsite</dir>
-      <dir>C:\wamp64\www\Test\imei\app</dir>
-      <dir>C:\wamp64\www\Test\imei\vendor\maatwebsite\excel\src\Jobs</dir>
-      <dir>C:\wamp64\www\Test\imei\vendor\maatwebsite\excel</dir>
-      <dir>C:\wamp64\www\Test\imei</dir>
-    </dirStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -144,12 +119,6 @@
       <path value="$PROJECT_DIR$/vendor/phpoffice/phpspreadsheet" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="54" />
-    <option name="y" value="-8" />
-    <option name="width" value="1874" />
-    <option name="height" value="1096" />
-  </component>
   <component name="ProjectId" id="1P6kihNlHRUTJlUBMeRY2Cf3igm" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -213,7 +182,8 @@
       <workItem from="1564584816646" duration="24000" />
       <workItem from="1564776207815" duration="1085000" />
       <workItem from="1565202065221" duration="817000" />
-      <workItem from="1565283518630" duration="610000" />
+      <workItem from="1565283518630" duration="872000" />
+      <workItem from="1565636664615" duration="1012000" />
     </task>
     <servers />
   </component>
