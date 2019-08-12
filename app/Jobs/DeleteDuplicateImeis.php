@@ -51,7 +51,7 @@ class DeleteDuplicateImeis implements ShouldQueue
             });
 
             (new ConsoleOutput)->writeln(
-                "Se ha procesado la cantidad de " . count($array) . " registros para borrado de duplicados"
+                "Se ha procesado la cantidad de " . $quantityProcessed . " registros para borrado de duplicados"
             );
 
             unset($array);
