@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Imei;
 use Illuminate\Bus\Queueable;
+use Illuminate\Queue\Jobs\Job;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -41,13 +42,15 @@ class DeleteDuplicateImeis implements ShouldQueue
             \DB::raw('SELECT id FROM `tblcodigos` ORDER BY `tblcodigos`.`id` DESC LIMIT 1')
         )[0]->id;
 
+        $quantityProcessed = 0;
+
+        $bash = \DB::table('jobs')->first()->bash ?? 1;
+
         (new ConsoleOutput)->writeln(
-           "last id " . $lastID
+            "bash " . $bash
         );
 
-        // $quantityProcessed = 0;
-        //
-        // Imei::chunk(50000, function ($items) use (&$quantityProcessed, $lastID) {
+        // Imei::where('id', '>', $bash)->chunk(50000, function ($items) use (&$quantityProcessed, $lastID) {
         //     $array = [];
         //
         //     $items->each( function ($item) use (&$array, &$quantityProcessed){
@@ -61,6 +64,7 @@ class DeleteDuplicateImeis implements ShouldQueue
         //     (new ConsoleOutput)->writeln(
         //         "Se ha procesado la cantidad de " . $quantityProcessed . " registros para borrado de duplicados de " . $lastID
         //     );
+        //
         //
         //     unset($array);
         // });
