@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eba4c7cd-e813-4ae0-8f96-3152a0b7f582" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Jobs/DeleteDuplicateImeis.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/DeleteDuplicateImeis.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -184,7 +185,7 @@
       <workItem from="1565283518630" duration="872000" />
       <workItem from="1565636664615" duration="4399000" />
       <workItem from="1565650490228" duration="122000" />
-      <workItem from="1565967645777" duration="4636000" />
+      <workItem from="1565967645777" duration="5027000" />
     </task>
     <servers />
   </component>

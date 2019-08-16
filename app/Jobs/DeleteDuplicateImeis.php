@@ -46,7 +46,7 @@ class DeleteDuplicateImeis implements ShouldQueue
 
         $bash = \DB::table('config')->where('index', 'bash')->first()->value ?? 0;
 
-        Imei::where('id', '>', $bash)->chunk(50000, function ($items) use (&$quantityProcessed, $lastID) {
+        Imei::where('id', '>', $bash)->chunk(5000, function ($items) use (&$quantityProcessed, $lastID) {
             $array = [];
 
             $items->each( function ($item) use (&$array, &$quantityProcessed){
@@ -57,7 +57,7 @@ class DeleteDuplicateImeis implements ShouldQueue
                 $quantityProcessed = $item->id;
             });
 
-            \DB::table('config')->where('index', 'bash')->first()->update(['value' => $quantityProcessed]);
+            \DB::table('config')->where('index', 'bash')->update(['value' => $quantityProcessed]);
 
             (new ConsoleOutput)->writeln(
                 "Se ha procesado la cantidad de " . $quantityProcessed . " registros para borrado de duplicados de " . $lastID
