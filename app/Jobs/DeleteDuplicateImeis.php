@@ -42,7 +42,7 @@ class DeleteDuplicateImeis implements ShouldQueue
         );
 
         (new ConsoleOutput)->writeln(
-           "last id $lastID"
+           "last id " . $lastID['id']
         );
 
         dd($lastID);
