@@ -46,10 +46,6 @@ class DeleteDuplicateImeis implements ShouldQueue
 
         $bash = \DB::table('config')->where('index', 'bash')->first()->value ?? 0;
 
-        (new ConsoleOutput)->writeln(
-            "bash " . $bash
-        );
-
         Imei::where('id', '>', $bash)->chunk(50000, function ($items) use (&$quantityProcessed, $lastID) {
             $array = [];
 
