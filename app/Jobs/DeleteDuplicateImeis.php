@@ -8,7 +8,6 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use SebastianBergmann\Environment\Console;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
 class DeleteDuplicateImeis implements ShouldQueue
@@ -38,8 +37,18 @@ class DeleteDuplicateImeis implements ShouldQueue
         set_time_limit ( 12000 );
         ini_set('memory_limit', '2048M');
 
-        $lastID = Imei::orderBy('id', 'DESC')->first()->id;
+        $lastID = \DB::select(
+            \DB::raw('SELECT id FROM `tblcodigos` ORDER BY `tblcodigos`.`id` DESC LIMIT 1')
+        );
+
+        (new ConsoleOutput)->writeln(
+           "last id $lastID"
+        );
+
+        dd($lastID);
+
         $quantityProcessed = 0;
+
         Imei::chunk(50000, function ($items) use (&$quantityProcessed, $lastID) {
             $array = [];
 
