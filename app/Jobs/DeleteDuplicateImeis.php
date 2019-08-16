@@ -39,32 +39,30 @@ class DeleteDuplicateImeis implements ShouldQueue
 
         $lastID = \DB::select(
             \DB::raw('SELECT id FROM `tblcodigos` ORDER BY `tblcodigos`.`id` DESC LIMIT 1')
+        )[0]->id;
+
+        (new ConsoleOutput)->writeln(
+           "last id " . $lastID
         );
 
-        // (new ConsoleOutput)->writeln(
-        //    "last id " . $lastID['id']
-        // );
-
-        dd($lastID[0]->id);
-
-        $quantityProcessed = 0;
-
-        Imei::chunk(50000, function ($items) use (&$quantityProcessed, $lastID) {
-            $array = [];
-
-            $items->each( function ($item) use (&$array, &$quantityProcessed){
-                if ( in_array($item->imei, $array) ) {
-                    $item->delete();
-                }
-                $array[] = $item->imei;
-                $quantityProcessed = $item->id;
-            });
-
-            (new ConsoleOutput)->writeln(
-                "Se ha procesado la cantidad de " . $quantityProcessed . " registros para borrado de duplicados de " . $lastID
-            );
-
-            unset($array);
-        });
+        // $quantityProcessed = 0;
+        //
+        // Imei::chunk(50000, function ($items) use (&$quantityProcessed, $lastID) {
+        //     $array = [];
+        //
+        //     $items->each( function ($item) use (&$array, &$quantityProcessed){
+        //         if ( in_array($item->imei, $array) ) {
+        //             $item->delete();
+        //         }
+        //         $array[] = $item->imei;
+        //         $quantityProcessed = $item->id;
+        //     });
+        //
+        //     (new ConsoleOutput)->writeln(
+        //         "Se ha procesado la cantidad de " . $quantityProcessed . " registros para borrado de duplicados de " . $lastID
+        //     );
+        //
+        //     unset($array);
+        // });
     }
 }
