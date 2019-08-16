@@ -45,7 +45,7 @@ class DeleteDuplicateImeis implements ShouldQueue
         //    "last id " . $lastID['id']
         // );
 
-        dd($lastID);
+        dd($lastID->id);
 
         $quantityProcessed = 0;
 
