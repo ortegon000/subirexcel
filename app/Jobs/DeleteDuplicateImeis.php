@@ -44,29 +44,31 @@ class DeleteDuplicateImeis implements ShouldQueue
 
         $quantityProcessed = 0;
 
-        $bash = \DB::table('jobs')->first()->bash ?? 1;
+        $bash = \DB::table('config')->where('index', 'bash')->first()->value ?? 0;
 
         (new ConsoleOutput)->writeln(
             "bash " . $bash
         );
 
-        // Imei::where('id', '>', $bash)->chunk(50000, function ($items) use (&$quantityProcessed, $lastID) {
-        //     $array = [];
-        //
-        //     $items->each( function ($item) use (&$array, &$quantityProcessed){
-        //         if ( in_array($item->imei, $array) ) {
-        //             $item->delete();
-        //         }
-        //         $array[] = $item->imei;
-        //         $quantityProcessed = $item->id;
-        //     });
-        //
-        //     (new ConsoleOutput)->writeln(
-        //         "Se ha procesado la cantidad de " . $quantityProcessed . " registros para borrado de duplicados de " . $lastID
-        //     );
-        //
-        //
-        //     unset($array);
-        // });
+        Imei::where('id', '>', $bash)->chunk(50000, function ($items) use (&$quantityProcessed, $lastID) {
+            $array = [];
+
+            $items->each( function ($item) use (&$array, &$quantityProcessed){
+                if ( in_array($item->imei, $array) ) {
+                    $item->delete();
+                }
+                $array[] = $item->imei;
+                $quantityProcessed = $item->id;
+            });
+
+            \DB::table('config')->where('index', 'bash')->first()->update(['value' => $quantityProcessed]);
+
+            (new ConsoleOutput)->writeln(
+                "Se ha procesado la cantidad de " . $quantityProcessed . " registros para borrado de duplicados de " . $lastID
+            );
+
+
+            unset($array);
+        });
     }
 }
