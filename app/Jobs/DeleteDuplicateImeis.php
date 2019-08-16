@@ -41,9 +41,9 @@ class DeleteDuplicateImeis implements ShouldQueue
             \DB::raw('SELECT id FROM `tblcodigos` ORDER BY `tblcodigos`.`id` DESC LIMIT 1')
         );
 
-        (new ConsoleOutput)->writeln(
-           "last id " . $lastID['id']
-        );
+        // (new ConsoleOutput)->writeln(
+        //    "last id " . $lastID['id']
+        // );
 
         dd($lastID);
 
