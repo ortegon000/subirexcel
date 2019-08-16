@@ -38,8 +38,9 @@ class DeleteDuplicateImeis implements ShouldQueue
         set_time_limit ( 12000 );
         ini_set('memory_limit', '2048M');
 
+        $lastID = Imei::orderBy('id', 'DESC')->first()->id;
         $quantityProcessed = 0;
-        Imei::chunk(50000, function ($items) use (&$quantityProcessed) {
+        Imei::chunk(50000, function ($items) use (&$quantityProcessed, $lastID) {
             $array = [];
 
             $items->each( function ($item) use (&$array, &$quantityProcessed){
@@ -47,11 +48,11 @@ class DeleteDuplicateImeis implements ShouldQueue
                     $item->delete();
                 }
                 $array[] = $item->imei;
-                $quantityProcessed++;
+                $quantityProcessed = $item->id;
             });
 
             (new ConsoleOutput)->writeln(
-                "Se ha procesado la cantidad de " . $quantityProcessed . " registros para borrado de duplicados"
+                "Se ha procesado la cantidad de " . $quantityProcessed . " registros para borrado de duplicados de " . $lastID
             );
 
             unset($array);
