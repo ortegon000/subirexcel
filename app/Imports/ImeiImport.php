@@ -16,7 +16,7 @@ class ImeiImport implements ToArray, WithChunkReading, WithHeadingRow, ShouldQue
 
     public $filename;
     public $timeOut = 20000;
-    public $tries = 3;
+    public $tries = 1;
 
     public $sum = 0;
 
