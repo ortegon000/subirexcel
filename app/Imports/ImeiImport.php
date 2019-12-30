@@ -30,12 +30,13 @@ class ImeiImport implements ToArray, WithChunkReading, WithHeadingRow, ShouldQue
 
     public function array(array $rows)
     {
-        foreach ($rows as $row) {
-            if (
-                isset($row['imei']) &&
-                isset($row['marca']) &&
-                isset($row['modelo'])
-            ) {
+        if (
+            isset($rows[0]['imei']) &&
+            isset($rows[0]['marca']) &&
+            isset($rows[0]['modelo'])
+        ) {
+            foreach ($rows as $row) {
+
                 $code2 = strpos($row['codigo2'], ',') ? explode(',', $row['codigo2'])[0] : $row['codigo2'];
 
                 DB::table('tblcodigos')->insert([
@@ -45,12 +46,12 @@ class ImeiImport implements ToArray, WithChunkReading, WithHeadingRow, ShouldQue
                     'codigo1' => $row['codigo'] ?? '',
                     'codigo2' => $code2 ?? '',
                 ]);
-            }
-            else {
-                (new ConsoleOutput)->writeln("El archivo a subir no esta basado en la plantilla de importacion");
-            }
 
-            $this->sum++;
+                $this->sum++;
+            }
+        }
+        else {
+            (new ConsoleOutput)->writeln("El archivo a subir no esta basado en la plantilla de importacion");
         }
 
         (new ConsoleOutput)->writeln("Number of rows inserted $this->sum on file $this->filename");
