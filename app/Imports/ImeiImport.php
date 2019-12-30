@@ -9,6 +9,7 @@ use Maatwebsite\Excel\Concerns\ToArray;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Symfony\Component\Console\Output\ConsoleOutput;
+use Illuminate\Support\Facades\Queue;
 
 class ImeiImport implements ToArray, WithChunkReading, WithHeadingRow, ShouldQueue
 {
