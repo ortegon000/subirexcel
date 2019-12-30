@@ -24,6 +24,7 @@ class ImeiImport implements ToArray, WithChunkReading, WithHeadingRow, ShouldQue
     {
         set_time_limit ( 3200 );
         ini_set('memory_limit', '2048M');
+        DB::connection()->disableQueryLog();
         $this->filename = $fileName;
     }
 
@@ -31,6 +32,7 @@ class ImeiImport implements ToArray, WithChunkReading, WithHeadingRow, ShouldQue
     {
         foreach ($rows as $row) {
             $code2 = strpos($row['codigo2'], ',') ? explode(',', $row['codigo2'])[0] : $row['codigo2'];
+
             DB::table('tblcodigos')->insert([
                 'imei'    => $row['imei'] ?? '',
                 'marca'   => $row['marca'] ?? '',
@@ -47,6 +49,6 @@ class ImeiImport implements ToArray, WithChunkReading, WithHeadingRow, ShouldQue
 
     public function chunkSize(): int
     {
-        return 8000;
+        return 1000;
     }
 }
