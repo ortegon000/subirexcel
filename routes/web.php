@@ -11,10 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    $queueRunning = \DB::table('jobs')->count();
-    return view('welcome', compact('queueRunning'));
-})->name('home');
+Route::get('/', 'ImeiController@home')->name('home');
 
 Route::post('upload-excel', 'ImeiController@uploadExcel')->name('upload_excel');
 Route::get('download-excel/template', 'ImeiController@downloadExcelTemplate')->name('download_excel.template');

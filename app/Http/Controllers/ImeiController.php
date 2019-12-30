@@ -10,6 +10,11 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ImeiController extends Controller
 {
+    public function home()
+    {
+        $queueRunning = \DB::table('jobs')->count();
+        return view('welcome', compact('queueRunning'));
+    }
     public function uploadExcel(Request $request)
     {
         $request->validate([
