@@ -60,6 +60,6 @@ class ImeiImport implements ToArray, WithChunkReading, WithHeadingRow, ShouldQue
 
     public function chunkSize(): int
     {
-        return 5000;
+        return 3000;
     }
 }
