@@ -53,7 +53,7 @@ class DeleteDuplicateImeis implements ShouldQueue
                     $quantityDeleted++;
                 }
 
-                if ($item->codigo1 <= '' && $item->imei <= '') {
+                if ($item->imei <= 0) {
                     $item->delete();
                     $quantityDeleted++;
 
