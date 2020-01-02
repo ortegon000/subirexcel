@@ -58,7 +58,7 @@ class DeleteDuplicateImeis implements ShouldQueue
                     $quantityDeleted++;
 
                     (new ConsoleOutput)->writeln(
-                        "Registro borrado por informacion inexistente"
+                        "Registro borrado por informacion inexistente, imei = " . $item->imei
                     );
                 }
 
