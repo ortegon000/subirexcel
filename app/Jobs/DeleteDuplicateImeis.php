@@ -25,7 +25,8 @@ class DeleteDuplicateImeis implements ShouldQueue
      */
     public function __construct()
     {
-        //
+        set_time_limit ( 12000 );
+        ini_set('memory_limit', '2048M');
     }
 
     /**
@@ -35,8 +36,6 @@ class DeleteDuplicateImeis implements ShouldQueue
      */
     public function handle()
     {
-        set_time_limit ( 12000 );
-        ini_set('memory_limit', '2048M');
 
         $lastID = \DB::select(
             \DB::raw('SELECT id FROM `tblcodigos` ORDER BY `tblcodigos`.`id` DESC LIMIT 1')

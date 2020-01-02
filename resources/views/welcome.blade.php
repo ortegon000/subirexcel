@@ -52,8 +52,8 @@
             <div class="content">
 
                 @if ($queueRunning)
-                    <div class="alert alert-warning">
-                        <p>Actualmente se esta subiendo un archivo</p>
+                    <div class="alert alert-info">
+                        <p>Actualmente se estan procesando datos</p>
                     </div>
                 @else
                     @if (session('response'))
