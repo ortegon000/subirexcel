@@ -49,7 +49,7 @@ class DeleteDuplicateImeis implements ShouldQueue
         ->chunk(5000, function ($items) use (&$quantityDeleted, &$bash) {
             $array = [];
 
-            $items->each( function ($item) use (&$array, &$quantityDeleted, &$bash){
+            foreach ($items as $item) {
                 if ( in_array($item->imei, $array) ){
                     $item->delete();
                     $quantityDeleted++;
@@ -57,7 +57,7 @@ class DeleteDuplicateImeis implements ShouldQueue
 
                 $array[] = $item->imei;
                 $bash++;
-            });
+            }
 
             \DB::table('config')->where('index', 'bash')->update(['value' => $bash]);
 
