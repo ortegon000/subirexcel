@@ -14,8 +14,6 @@ class DeleteDuplicateImeis implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public $timeout = 20000;
-
     /**
      * Create a new job instance.
      *
@@ -69,5 +67,9 @@ class DeleteDuplicateImeis implements ShouldQueue
 
             unset($array);
         });
+
+        (new ConsoleOutput)->writeln(
+            "El utlimo bash procesado fue el " . $bash
+        );
     }
 }
