@@ -50,11 +50,14 @@ class DeleteDuplicateImeis implements ShouldQueue
             "El utlimo bash fue el " . $bash
         );
 
-        Imei::where('id', '>', $bash)->orderBy('imei', 'DESC')->take(10000)->chunk(5000, function ($items) use (&$quantityProcessed, $lastID) {
+        Imei::where('id', '>', $bash)->orderBy('imei', 'DESC')->take(10000)->chunk(3000, function ($items) use (&$quantityProcessed, $lastID) {
             $array = [];
 
             $items->each( function ($item) use (&$array, &$quantityProcessed){
-                if ( in_array($item->imei, $array) ) {
+                if (
+                    in_array($item->imei, $array)
+                    || ($item->codigo1 === '' && $item->imei === '')
+                ){
                     $item->delete();
                 }
                 $array[] = $item->imei;
