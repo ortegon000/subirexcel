@@ -41,7 +41,10 @@ class DeleteDuplicateImeis implements ShouldQueue
             "El utlimo bash fue el " . $bash
         );
 
-        dd(Imei::where('imei', '')->take(10)->get()->delete());
+        Imei::where('imei', '')
+            ->where('marca', '')
+            ->where('modelo', '')
+            ->delete();
 
         Imei::orderBy('imei', 'DESC')
         ->skip($bash)
