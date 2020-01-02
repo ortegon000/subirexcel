@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eba4c7cd-e813-4ae0-8f96-3152a0b7f582" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Jobs/DeleteDuplicateImeis.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/DeleteDuplicateImeis.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -197,7 +196,7 @@
       <workItem from="1577736793162" duration="583000" />
       <workItem from="1577738675803" duration="4708000" />
       <workItem from="1577753931420" duration="681000" />
-      <workItem from="1577988365393" duration="5491000" />
+      <workItem from="1577988365393" duration="5550000" />
     </task>
     <servers />
   </component>

@@ -69,7 +69,7 @@ class DeleteDuplicateImeis implements ShouldQueue
             \DB::table('config')->where('index', 'bash')->update(['value' => $bash]);
 
             (new ConsoleOutput)->writeln(
-                "Se ha borrado la cantidad de " . $quantityDeleted . " registros"
+                "Se ha borrado la cantidad de " . $quantityDeleted . " registros de " . $bash . " procesados"
             );
 
             unset($array);
