@@ -15,7 +15,7 @@ class DeleteDuplicateImeis implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public $timeOut = 20000;
+    public $timeout = 20000;
     public $tries = 1;
 
     /**
