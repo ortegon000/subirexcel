@@ -48,14 +48,13 @@ class DeleteDuplicateImeis implements ShouldQueue
 
         Imei::orderBy('imei', 'DESC')
         ->skip($bash)
-        ->chunk(2500, function ($items) use (&$quantityDeleted, &$bash) {
+        ->chunk(5000, function ($items) use (&$quantityDeleted, &$bash) {
             $array = [];
 
             $items->each( function ($item) use (&$array, &$quantityDeleted, &$bash){
                 if ( in_array($item->imei, $array) ){
                     $item->delete();
                     $quantityDeleted++;
-                    (new ConsoleOutput)->writeln("Registro borrado por duplicidad");
                 }
 
                 $array[] = $item->imei;
