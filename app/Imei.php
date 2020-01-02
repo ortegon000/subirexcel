@@ -9,7 +9,7 @@ class Imei extends Model
     protected $table = 'tblcodigos';
 
     protected $fillable = [
-        'MARCA', 'MODELO', 'IMEI'
+        'marca', 'modelo', 'imei'
     ];
 
     public $timestamps = false;
