@@ -45,7 +45,6 @@ class DeleteDuplicateImeis implements ShouldQueue
 
         Imei::orderBy('imei', 'DESC')
         ->skip($bash)
-        ->take(4000)
         ->chunk(2000, function ($items) use (&$quantityDeleted, &$bash) {
             $array = [];
 
