@@ -4,7 +4,6 @@ namespace App\Jobs;
 
 use App\Imei;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\Jobs\Job;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -54,7 +53,7 @@ class DeleteDuplicateImeis implements ShouldQueue
                     $quantityDeleted++;
                 }
 
-                if ($item->codigo1 === '' && $item->imei === '') {
+                if ($item->codigo1 <= '' && $item->imei <= '') {
                     $item->delete();
                     $quantityDeleted++;
                 }
