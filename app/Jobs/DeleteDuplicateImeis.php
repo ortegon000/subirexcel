@@ -51,6 +51,9 @@ class DeleteDuplicateImeis implements ShouldQueue
                 if ( in_array($item->imei, $array) ){
                     $item->delete();
                     $quantityDeleted++;
+                    (new ConsoleOutput)->writeln(
+                        "Registro borrado por duplicidad"
+                    );
                 }
 
                 if ($item->imei <= 0) {
