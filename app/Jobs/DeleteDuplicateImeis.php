@@ -36,37 +36,35 @@ class DeleteDuplicateImeis implements ShouldQueue
      */
     public function handle()
     {
-
-        $lastID = \DB::select(
-            \DB::raw('SELECT id FROM `tblcodigos` ORDER BY `tblcodigos`.`id` DESC LIMIT 1')
-        )[0]->id;
-
-        $quantityProcessed = 0;
-
+        $quantityDeleted = 0;
         $bash = \DB::table('config')->where('index', 'bash')->first()->value ?? 0;
 
         (new ConsoleOutput)->writeln(
             "El utlimo bash fue el " . $bash
         );
 
-        Imei::where('id', '>', $bash)->orderBy('imei', 'DESC')->take(3000)->chunk(1000, function ($items) use (&$quantityProcessed, $lastID) {
+        Imei::orderBy('imei', 'DESC')
+        ->skip($bash)
+        ->take(4000)
+        ->chunk(2000, function ($items) use (&$quantityDeleted, &$bash) {
             $array = [];
 
-            $items->each( function ($item) use (&$array, &$quantityProcessed){
+            $items->each( function ($item) use (&$array, &$quantityDeleted, &$bash){
                 if (
                     in_array($item->imei, $array)
                     || ($item->codigo1 === '' && $item->imei === '')
                 ){
                     $item->delete();
+                    $quantityDeleted++;
                 }
                 $array[] = $item->imei;
-                $quantityProcessed = $item->id;
+                $bash++;
             });
 
-            \DB::table('config')->where('index', 'bash')->update(['value' => $quantityProcessed]);
+            \DB::table('config')->where('index', 'bash')->update(['value' => $bash]);
 
             (new ConsoleOutput)->writeln(
-                "Se ha procesado la cantidad de " . $quantityProcessed . " registros para borrado de duplicados de " . $lastID
+                "Se ha borrado la cantidad de " . $quantityDeleted . " registros"
             );
 
             unset($array);
