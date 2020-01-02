@@ -43,8 +43,8 @@ class DeleteDuplicateImeis implements ShouldQueue
 
         Imei::orderBy('imei', 'DESC')
         ->skip($bash)
-        ->take(1000)
-        ->chunk(1000, function ($items) use (&$quantityDeleted, &$bash) {
+        ->take(100)
+        ->chunk(10, function ($items) use (&$quantityDeleted, &$bash) {
             $array = [];
 
             $items->each( function ($item) use (&$array, &$quantityDeleted, &$bash){
@@ -56,6 +56,10 @@ class DeleteDuplicateImeis implements ShouldQueue
                 if ($item->codigo1 <= '' && $item->imei <= '') {
                     $item->delete();
                     $quantityDeleted++;
+
+                    (new ConsoleOutput)->writeln(
+                        "Registro borrado por informacion inexistente"
+                    );
                 }
 
                 $array[] = $item->imei;
