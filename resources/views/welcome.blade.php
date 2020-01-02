@@ -53,6 +53,9 @@
 
                 @if ($queueRunning)
                     <div class="alert alert-info">
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
                         <p>Actualmente se estan procesando datos</p>
                     </div>
                 @else
