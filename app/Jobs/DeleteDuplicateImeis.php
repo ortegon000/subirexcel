@@ -41,6 +41,8 @@ class DeleteDuplicateImeis implements ShouldQueue
             "El utlimo bash fue el " . $bash
         );
 
+        dd(Imei::where('imei', '')->take(10)->get()->delete());
+
         Imei::orderBy('imei', 'DESC')
         ->skip($bash)
         ->take(100)
@@ -53,15 +55,6 @@ class DeleteDuplicateImeis implements ShouldQueue
                     $quantityDeleted++;
                     (new ConsoleOutput)->writeln(
                         "Registro borrado por duplicidad"
-                    );
-                }
-
-                if ($item->imei <= 0) {
-                    $item->delete();
-                    $quantityDeleted++;
-
-                    (new ConsoleOutput)->writeln(
-                        "Registro borrado por informacion inexistente, imei = " . $item->imei
                     );
                 }
 
