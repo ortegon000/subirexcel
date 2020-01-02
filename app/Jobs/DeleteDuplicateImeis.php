@@ -34,6 +34,7 @@ class DeleteDuplicateImeis implements ShouldQueue
     {
         $quantityDeleted = 0;
         $bash = \DB::table('config')->where('index', 'bash')->first()->value ?? 0;
+        $max = Imei::count();
 
         (new ConsoleOutput)->writeln(
             "El utlimo bash fue el " . $bash
@@ -46,6 +47,7 @@ class DeleteDuplicateImeis implements ShouldQueue
 
         Imei::orderBy('imei', 'DESC')
         ->skip($bash)
+        ->take($max)
         ->chunk(5000, function ($items) use (&$quantityDeleted, &$bash) {
             $array = [];
 
