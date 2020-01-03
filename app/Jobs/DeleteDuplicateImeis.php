@@ -55,7 +55,6 @@ class DeleteDuplicateImeis implements ShouldQueue
                     $item->delete();
                     $quantityDeleted++;
                 }
-                (new ConsoleOutput)->writeln("id: " . $item->id);
 
                 $array[] = $item->imei;
                 $bash++;
